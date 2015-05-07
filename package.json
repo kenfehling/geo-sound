@@ -1,0 +1,44 @@
+{
+  "name": "geo-sound",
+  "version": "0.0.1",
+  "private": false,
+  "repository": "https://github.com/kenfehling/geo-sound.git",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+    "express": "4.x",
+    "jquery": "2.1.x",
+    "lodash": "2.4.x",
+    "pubsub-js": "1.5.x",
+    "serve-favicon": "2.1.x",
+    "snapsvg": "^0.4.0"
+  },
+  "browser": {
+    "jquery": "./node_modules/jquery/dist/jquery.min.js"
+  },
+  "browserify-shim": {
+    "jquery": "$"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "devDependencies": {
+    "almond": "^0.3.0",
+    "amdefine": ">=0.1.0",
+    "require-uncached": "^1.0.2",
+    "chai": "^1.9.1",
+    "mocha": "^1.21.4",
+    "sinon": "^1.10.3",
+    "browserify-shim": "~3.2.0",
+    "grunt": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-browserify": "*",
+    "grunt-sass": "*"
+  }
+}
