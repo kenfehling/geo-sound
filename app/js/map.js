@@ -68,6 +68,6 @@ $(function() {
     }
 
     function getColorIndexPath(index) {
-        return $('#Layer_' + (index + 1));
+        return $('#Map_Layer_' + (index + 1));
     }
 });
