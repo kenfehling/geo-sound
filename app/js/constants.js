@@ -1,6 +1,3 @@
-/*jshint strict: true */
-/*global module */
-
 var constants = {
     NUM_TYPES: 11,
 

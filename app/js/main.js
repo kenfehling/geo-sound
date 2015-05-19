@@ -1,6 +1,3 @@
-/*jshint strict: true */
-/*global require */
-
 var $ = require('jquery');
 var _ = require('lodash');
 var pubsub = require('pubsub-js');

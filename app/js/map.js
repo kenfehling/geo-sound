@@ -7,9 +7,6 @@ var DEFAULT_OPACITY = 0.5;
 var SVG_FILE = '/img/map.svg';
 var ID = 'map';
 
-/*jshint strict: true */
-/*global require */
-
 var $ = require('jquery');
 var _ = require('lodash');
 var Snap = require('snapsvg');
