@@ -1,8 +1,4 @@
 var HIGHLIGHT_DURATION = 1000;  // milliseconds
-var ORIGINAL_WIDTH = 800;
-var ORIGINAL_HEIGHT = 600;
-var SCALED_WIDTH = 480;
-var SCALED_HEIGHT = 360;
 var DEFAULT_OPACITY = 0.5;
 var SVG_FILE = '/img/map.svg';
 var ID = 'map';
@@ -13,8 +9,11 @@ var Snap = require('snapsvg');
 var pubsub = require('pubsub-js');
 var constants = require('./constants');
 
+var svg, origWidth, origHeight, widthToHeight;
+
 $(function() {
     "use strict";
+    $(window).resize(resize);
 
     loadSvg(function() {  // When finished loading SVG
         unhighlightAll();
@@ -26,15 +25,37 @@ $(function() {
         });
     });
 
+    function resize() {
+        var maxWidth = $(window).width();
+        var maxHeight = $(window).height();
+        var widthIsBigger = maxWidth/maxHeight > widthToHeight;
+        if (widthIsBigger) {
+            setSvgSize(maxHeight * widthToHeight, maxHeight);
+        }
+        else {
+            setSvgSize(maxWidth, maxWidth / widthToHeight);
+        }
+    }
+
+    function setSvgSize(w, h) {
+        if (svg) {
+            svg.setAttribute('width', Math.floor(w) + 'px');
+            svg.setAttribute('height', Math.floor(h) + 'px');
+        }
+    }
+
     function loadSvg(callback) {
         var snap = new Snap("#" + ID);
         Snap.load(SVG_FILE, function(data){
             snap.append(data);
-            var svg = $("#" + ID).find('svg')[0];
-            svg.setAttribute('width', SCALED_WIDTH + 'px');
-            svg.setAttribute('height', SCALED_HEIGHT + 'px');
-            svg.setAttribute('viewBox', '0 0 ' + ORIGINAL_WIDTH + ' ' + ORIGINAL_HEIGHT);
+            svg = $("#" + ID).find('svg')[0];
+            var $svg = $(svg);
+            origWidth = $svg.width();
+            origHeight = $svg.height();
+            widthToHeight = origWidth / origHeight;
+            svg.setAttribute('viewBox', '0 0 ' + origWidth + ' ' + origHeight);
             svg.setAttribute('preserveAspectRatio', 'xMinYMin meet');
+            resize();
             callback();
         });
     }
